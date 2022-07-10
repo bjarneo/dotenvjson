@@ -97,9 +97,10 @@ cat demo.json
 }
 ```
 
-## Missing
+## Missing, but coming
 
-Currently, this package do not have any multiline parsing support. This is coming.
+- No multiline parsing support
+- No pipe to dotenvjson
 
 ## License
 
