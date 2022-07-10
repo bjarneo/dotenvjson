@@ -18,6 +18,16 @@ Usage of dotenvjson:
   -pt bool    Print to terminal. (default true)
 ```
 
+## Build
+
+```bash
+go build -o bin/dotenvjson
+```
+
+## Releases
+
+Have a look at the releases page for binaries.
+
 ## Example
 
 ```bash
