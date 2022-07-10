@@ -87,6 +87,10 @@ cat demo.json
 }
 ```
 
+## Missing
+
+Currently, this package do not have any multiline parsing support. This is coming.
+
 ## License
 
 See [LICENSE](LICENSE)
