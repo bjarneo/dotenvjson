@@ -42,7 +42,7 @@ func Tokenizer(content string) []Token {
 				key := ""
 
 				// Go on until we find the variable assignment
-				for char != "=" {
+				for string(line[current]) != "=" {
 					key += char
 
 					current++

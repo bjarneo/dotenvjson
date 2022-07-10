@@ -5,6 +5,9 @@ Convert .env files to JSON. 📄
 ## About
 
 I have used principles from creating a programming language to transform a .env file to JSON. It is kind of an tweaked approach, but works fine. 🔥
+
+Don't you go look at my messy tokenizer.go file 😏
+
 ## Usage
 
 ```bash
@@ -14,10 +17,6 @@ Usage of dotenvjson:
   -p  bool    Pretty print the output. (default false)
   -pt bool    Print to terminal. (default true)
 ```
-
-## Missing
-
-- Multiline parsing
 
 ## Example
 
