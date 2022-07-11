@@ -104,7 +104,6 @@ cat demo.json
 
 - multiline parsing support
 - pipe to dotenvjson
-- numbers to...numbers. I.e. "8080" -> 8080
 
 ## License
 
