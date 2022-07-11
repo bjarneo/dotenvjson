@@ -6,6 +6,9 @@ Convert .env files to JSON. 📄
 
 I have used principles from creating a programming language to transform a .env file to JSON. It is kind of an tweaked approach, but works fine. 🔥
 
+`This is overengineered`
+Yes, I know. This is the fun factor. I am aware this can be solved in an easier way, but as many other things on github, I created this tool for fun in a way that is challenging.
+
 Don't you go look at my messy tokenizer.go file 😏
 
 ## Usage
@@ -99,8 +102,9 @@ cat demo.json
 
 ## Missing, but coming
 
-- No multiline parsing support
-- No pipe to dotenvjson
+- multiline parsing support
+- pipe to dotenvjson
+- numbers to...numbers. I.e. "8080" -> 8080
 
 ## License
 
