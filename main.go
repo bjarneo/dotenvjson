@@ -1,13 +1,32 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/bjarneo/dotenvjson/core"
 )
+
+func pipeInput() string {
+	data := ""
+
+	scanner := bufio.NewScanner(os.Stdin)
+
+	for scanner.Scan() {
+		data += scanner.Text() + "\n"
+	}
+
+	err := scanner.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return data
+}
 
 func main() {
 	pretty := flag.Bool("p", false, "Pretty print the output. Default 'false'")
@@ -19,14 +38,16 @@ func main() {
 	// Get the dotenv file
 	filename := flag.Arg(0)
 
-	if filename == "" {
-		log.Fatal(" [!] The file is empty")
+	data := ""
+	if filename != "" {
+		data = core.FileContent(filename)
+	} else {
+		data = pipeInput()
 	}
 
-	JSON, AST := core.Compiler(core.FileContent(filename))
+	JSON, AST := core.Compiler(data)
 
 	jsonOutput := ""
-
 	if *pretty {
 		prettyPrint, err := json.MarshalIndent(AST, "", "  ")
 

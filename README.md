@@ -65,6 +65,8 @@ JSON='{"key":"value","nested":{"key":"value"},"number":1}'
 ###############################
 dotenvjson -p -o=demo.json .env.example
 
+# or pipe the data such as this:
+# cat .env.example | dotenvjson -p -o=demo.json
 {
   "DB": "hackers_exposed",
   "DEV_PORT": "1337",
@@ -103,7 +105,6 @@ cat demo.json
 ## Missing, but coming
 
 - multiline parsing support
-- pipe to dotenvjson
 
 ## License
 
