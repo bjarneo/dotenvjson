@@ -2,6 +2,8 @@
 
 Convert .env files to JSON. 📄
 
+![dotenvjson](./dotenvjson.gif)
+
 ## About
 
 I have used principles from creating a programming language to transform a .env file to JSON. It is kind of an tweaked approach, but works fine. 🔥
