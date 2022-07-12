@@ -32,6 +32,7 @@ func main() {
 	pretty := flag.Bool("p", false, "Pretty print the output. Default 'false'")
 	printTerminal := flag.Bool("pt", true, "Print to terminal. Default 'true'.")
 	output := flag.String("o", "", "Save the output to file. -o=file.json")
+	yaml := flag.Bool("y", false, "Transform it to YAML")
 
 	flag.Parse()
 
@@ -45,26 +46,33 @@ func main() {
 		data = pipeInput()
 	}
 
-	JSON, AST := core.Compiler(data)
+	kind := ""
+	if *yaml {
+		kind = "yaml"
+	} else {
+		kind = "json"
+	}
 
-	jsonOutput := ""
-	if *pretty {
+	generatedData, AST := core.Compiler(data, kind)
+
+	result := ""
+	if *pretty && kind == "json" {
 		prettyPrint, err := json.MarshalIndent(AST, "", "  ")
 
 		if err != nil {
 			log.Fatalf(" [!] Something happened while creating the pretty print JSON \n %s", err)
 		}
 
-		jsonOutput = string(prettyPrint)
+		result = string(prettyPrint)
 	} else {
-		jsonOutput = string(JSON)
+		result = generatedData
 	}
 
 	if *output != "" {
-		core.WriteFile(*output, jsonOutput)
+		core.WriteFile(*output, result)
 	}
 
 	if *printTerminal {
-		fmt.Print(jsonOutput)
+		fmt.Print(result)
 	}
 }

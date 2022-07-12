@@ -21,6 +21,7 @@ Usage of dotenvjson:
   -o  string  Save the output to file. -o=file.json
   -p  bool    Pretty print the output. (default false)
   -pt bool    Print to terminal. (default true)
+  -y  bool    Transform it to YAML
 ```
 
 ## Build
@@ -102,6 +103,24 @@ cat demo.json
   "USER": "root",
   "WOW": "\"such nice # work\""
 }
+
+###############################
+#       Transform to YAML     #
+###############################
+cat .env.example | dotenvjson -y
+
+DB: hackers_exposed
+DEV_PORT: 1337
+DIALECT: mysql
+HOST: db.host
+INTERPOLATED: '"Multiple\nLines and variable substitution: ${SIMPLE}"'
+JSON: '''{"key":"value","nested":{"key":"value"},"number":1}'''
+NON_INTERPOLATED: '''raw text without variable interpolation'''
+PASSWORD: betterlucknexttime!
+PROD_PORT: 8080
+STATUS: production
+USER: root
+WOW: '"such nice # work"'
 ```
 
 ## Missing, but coming
