@@ -34,9 +34,6 @@ func Tokenizer(content string) []Token {
 		for current < lineLength {
 			char := string(line[current])
 
-			// end of line
-			// eol := current == lineLength
-
 			// Find the key by starting from the first letter of the line
 			if current == 0 {
 				key := ""
