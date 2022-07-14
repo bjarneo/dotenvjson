@@ -8,6 +8,14 @@ import (
 	"github.com/bjarneo/dotenvjson/core"
 )
 
+func outputStrategy(input core.Inputs) string {
+	if input.Yaml {
+		return "yaml"
+	}
+
+	return "json"
+}
+
 func main() {
 	input := core.Input()
 
@@ -18,12 +26,7 @@ func main() {
 		data = core.PipeInput()
 	}
 
-	kind := ""
-	if input.Yaml {
-		kind = "yaml"
-	} else {
-		kind = "json"
-	}
+	kind := outputStrategy(input)
 
 	generatedData, AST := core.Compiler(data, kind)
 
