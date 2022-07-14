@@ -8,31 +8,31 @@ import (
 	"github.com/bjarneo/dotenvjson/core"
 )
 
-func outputStrategy(input core.Inputs) string {
-	if input.Yaml {
+func outputStrategy(args core.Args) string {
+	if args.Yaml {
 		return "yaml"
 	}
 
 	return "json"
 }
 
-func inputStrategy(input core.Inputs) string {
-	if input.Filename != "" {
-		return core.FileContent(input.Filename)
+func inputStrategy(args core.Args) string {
+	if args.Filename != "" {
+		return core.FileContent(args.Filename)
 	}
 
 	return core.PipeInput()
 }
 
 func main() {
-	input := core.Input()
-	data := inputStrategy(input)
-	kind := outputStrategy(input)
+	args := core.Arg()
+	data := inputStrategy(args)
+	kind := outputStrategy(args)
 
 	generatedData, AST := core.Compiler(data, kind)
 
 	result := ""
-	if input.Pretty && kind == "json" {
+	if args.Pretty && kind == "json" {
 		prettyPrint, err := json.MarshalIndent(AST, "", "  ")
 
 		if err != nil {
@@ -44,11 +44,11 @@ func main() {
 		result = generatedData
 	}
 
-	if input.Output != "" {
-		core.WriteFile(input.Output, result)
+	if args.Output != "" {
+		core.WriteFile(args.Output, result)
 	}
 
-	if input.PrintTerminal {
+	if args.PrintTerminal {
 		fmt.Print(result)
 	}
 }

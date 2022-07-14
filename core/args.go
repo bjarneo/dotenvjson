@@ -24,7 +24,7 @@ func PipeInput() string {
 	return data
 }
 
-type Inputs struct {
+type Args struct {
 	Pretty        bool
 	PrintTerminal bool
 	Yaml          bool
@@ -32,7 +32,7 @@ type Inputs struct {
 	Filename      string
 }
 
-func Input() Inputs {
+func Arg() Args {
 	pretty := flag.Bool("p", false, "Pretty print the output. Default 'false'")
 	printTerminal := flag.Bool("pt", true, "Print to terminal. Default 'true'.")
 	output := flag.String("o", "", "Save the output to file. -o=file.json")
@@ -43,7 +43,7 @@ func Input() Inputs {
 	// Get the dotenv file
 	filename := flag.Arg(0)
 
-	return Inputs{
+	return Args{
 		Pretty:        *pretty,
 		PrintTerminal: *printTerminal,
 		Yaml:          *yaml,
