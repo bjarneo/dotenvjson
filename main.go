@@ -16,16 +16,17 @@ func outputStrategy(input core.Inputs) string {
 	return "json"
 }
 
-func main() {
-	input := core.Input()
-
-	data := ""
+func inputStrategy(input core.Inputs) string {
 	if input.Filename != "" {
-		data = core.FileContent(input.Filename)
-	} else {
-		data = core.PipeInput()
+		return core.FileContent(input.Filename)
 	}
 
+	return core.PipeInput()
+}
+
+func main() {
+	input := core.Input()
+	data := inputStrategy(input)
 	kind := outputStrategy(input)
 
 	generatedData, AST := core.Compiler(data, kind)
