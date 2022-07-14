@@ -1,53 +1,25 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
-	"flag"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/bjarneo/dotenvjson/core"
 )
 
-func pipeInput() string {
-	data := ""
-
-	scanner := bufio.NewScanner(os.Stdin)
-
-	for scanner.Scan() {
-		data += scanner.Text() + "\n"
-	}
-
-	err := scanner.Err()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return data
-}
-
 func main() {
-	pretty := flag.Bool("p", false, "Pretty print the output. Default 'false'")
-	printTerminal := flag.Bool("pt", true, "Print to terminal. Default 'true'.")
-	output := flag.String("o", "", "Save the output to file. -o=file.json")
-	yaml := flag.Bool("y", false, "Transform it to YAML")
-
-	flag.Parse()
-
-	// Get the dotenv file
-	filename := flag.Arg(0)
+	input := core.Input()
 
 	data := ""
-	if filename != "" {
-		data = core.FileContent(filename)
+	if input.Filename != "" {
+		data = core.FileContent(input.Filename)
 	} else {
-		data = pipeInput()
+		data = core.PipeInput()
 	}
 
 	kind := ""
-	if *yaml {
+	if input.Yaml {
 		kind = "yaml"
 	} else {
 		kind = "json"
@@ -56,7 +28,7 @@ func main() {
 	generatedData, AST := core.Compiler(data, kind)
 
 	result := ""
-	if *pretty && kind == "json" {
+	if input.Pretty && kind == "json" {
 		prettyPrint, err := json.MarshalIndent(AST, "", "  ")
 
 		if err != nil {
@@ -68,11 +40,11 @@ func main() {
 		result = generatedData
 	}
 
-	if *output != "" {
-		core.WriteFile(*output, result)
+	if input.Output != "" {
+		core.WriteFile(input.Output, result)
 	}
 
-	if *printTerminal {
+	if input.PrintTerminal {
 		fmt.Print(result)
 	}
 }
