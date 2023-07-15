@@ -30,6 +30,7 @@ type Args struct {
 	Yaml          bool
 	Output        string
 	Filename      string
+	Kv            string
 }
 
 func Arg() Args {
@@ -37,6 +38,7 @@ func Arg() Args {
 	printTerminal := flag.Bool("pt", true, "Print to terminal. Default 'true'.")
 	output := flag.String("o", "", "Save the output to file. -o=file.json")
 	yaml := flag.Bool("y", false, "Transform it to YAML")
+	kv := flag.String("kv", "", "Define the key-value pair. -kv=name,value")
 
 	flag.Parse()
 
@@ -49,5 +51,6 @@ func Arg() Args {
 		Yaml:          *yaml,
 		Output:        *output,
 		Filename:      filename,
+		Kv:            *kv,
 	}
 }

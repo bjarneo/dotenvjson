@@ -22,6 +22,7 @@ Usage of dotenvjson:
   -p  bool    Pretty print the output. (default false)
   -pt bool    Print to terminal. (default true)
   -y  bool    Transform it to YAML
+  -kv string  Define the key-value pair. -kv=name,value. (default "")
 ```
 
 ## Build
@@ -121,11 +122,71 @@ PROD_PORT: 8080
 STATUS: production
 USER: root
 WOW: '"such nice # work"'
+
+###################################
+# Define your own key value pairs #
+###################################
+dotenvjson -kv=name,value -p .env.example
+
+[
+  {
+    "name": "NON_INTERPOLATED",
+    "value": "'raw text without variable interpolation'"
+  },
+  {
+    "name": "PROD_PORT",
+    "value": 8080
+  },
+  {
+    "name": "USER",
+    "value": "root"
+  },
+  {
+    "name": "PASSWORD",
+    "value": "betterlucknexttime!"
+  },
+  {
+    "name": "DB",
+    "value": "hackers_exposed"
+  },
+  {
+    "name": "WOW",
+    "value": "\"such nice # work\""
+  },
+  {
+    "name": "INTERPOLATED",
+    "value": "\"Multiple\\nLines and variable substitution: ${SIMPLE}\""
+  },
+  {
+    "name": "STATUS",
+    "value": "production"
+  },
+  {
+    "name": "DEV_PORT",
+    "value": 1337
+  },
+  {
+    "name": "TRY_ME",
+    "value": "12woop"
+  },
+  {
+    "name": "HOST",
+    "value": "db.host"
+  },
+  {
+    "name": "DIALECT",
+    "value": "mysql"
+  },
+  {
+    "name": "JSON",
+    "value": "'{\"key\":\"value\",\"nested\":{\"key\":\"value\"},\"number\":1}'"
+  }
+]
 ```
 
 ## Missing, but coming
 
-- multiline parsing support
+-   multiline parsing support
 
 ## License
 
