@@ -64,6 +64,14 @@ func Tokenizer(content string) []Token {
 
 				// Skip the "="
 				current++
+
+				// If the env variable is empty
+				if len(line) <= current {
+					_tokens = append(_tokens, Token{Kind: "Value", Value: ""})
+
+					break
+				}
+
 				char = string(line[current])
 
 				for current < lineLength {
