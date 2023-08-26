@@ -3,7 +3,7 @@ on:
     types: [created]
 env:
   BINARY_NAME: dotenvjson
-  GO_VERSION: latest
+  GO_VERSION: "1.19"
 
 permissions:
   contents: write
