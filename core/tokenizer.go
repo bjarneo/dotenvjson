@@ -81,6 +81,13 @@ func Tokenizer(content string) []Token {
 						hashAllowed = true
 					}
 
+					// I.e we hit a space and we are not in a quote
+					// and this is a password with the hash
+					// then we allow the hash
+					if char == "#" && string(line[current + 1]) != " " {
+						hashAllowed = true
+					}
+
 					// Skip everything if we hit a comment
 					if !hashAllowed && char == "#" {
 						comment += string(line[current])
