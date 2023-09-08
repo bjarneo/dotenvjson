@@ -1,20 +1,28 @@
 package core
 
 import (
+	"bytes"
 	"encoding/json"
 	"log"
 	"strings"
 )
 
-func JSONGenerator(AST any) string {
-	json, err := json.Marshal(AST)
+func JSONGenerator(AST any, indent bool) string {
+	var buf bytes.Buffer
 
-	if err != nil {
+	encoder := json.NewEncoder(&buf)
+	encoder.SetEscapeHTML(false)
+
+	if indent {
+		encoder.SetIndent("", "  ")
+	}
+
+	if err := encoder.Encode(AST); err != nil {
 		log.Fatal(err)
 	}
 
 	// return the json as a string
-	return string(json)
+	return buf.String()
 }
 
 type M map[string]interface{}
@@ -32,12 +40,3 @@ func TransformKV(AST map[string]interface{}, kv string) []M {
 	return output
 }
 
-func PrettyPrint(AST any) string {
-	prettyPrint, err := json.MarshalIndent(AST, "", "  ")
-
-	if err != nil {
-		log.Fatalf(" [!] Something happened while creating the pretty print JSON \n %s", err)
-	}
-
-	return string(prettyPrint)
-}

@@ -31,20 +31,12 @@ func main() {
 
 	result := ""
 
-	if kind == "json" && args.Pretty && args.Kv != "" {
-		result = core.PrettyPrint(core.TransformKV(AST, args.Kv))
+	if kind == "json" && args.Kv != "" {
+		result = core.JSONGenerator(core.TransformKV(AST, args.Kv), args.Pretty)
 	}
 
-	if kind == "json" && !args.Pretty && args.Kv != "" {
-		result = core.JSONGenerator(core.TransformKV(AST, args.Kv))
-	}
-
-	if kind == "json" && args.Pretty && args.Kv == "" {
-		result = core.PrettyPrint(AST)
-	}
-
-	if kind == "json" && !args.Pretty && args.Kv == "" {
-		result = core.JSONGenerator(AST)
+	if kind == "json" && args.Kv == "" {
+		result = core.JSONGenerator(AST, args.Pretty)
 	}
 
 	if kind == "yaml" {
